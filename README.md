@@ -5,7 +5,11 @@
 ### web 使用说明:
 ### 1,导入项目依赖jar文件
 ### 2,配置web.xml，示例:
+<<<<<<< HEAD
 
+=======
+{
+>>>>>>> refs/remotes/haloremote/master
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" 
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -61,8 +65,14 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
                 <dispatcher>FORWARD</dispatcher>
         </filter-mapping>
 </web-app>
+<<<<<<< HEAD
 
 ### 3.在spring配置文件中写入:
+=======
+}
+### 3.在spring配置文件中写入:
+{
+>>>>>>> refs/remotes/haloremote/master
 <!-- 在spring的配置文件中添加 -->
 <context:annotation-config />
         <!-- 通过annotation 扫描的根目录 -->
@@ -100,7 +110,11 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
         </bean>
 }
 ### 4,在demo.haloweb.dev3g.web目录中写一个Action代码
+<<<<<<< HEAD
 
+=======
+{
+>>>>>>> refs/remotes/haloremote/master
 package demo.haloweb.dev3g.web;
 
 import halo.util.FileUtil;
@@ -213,7 +227,11 @@ public class HelloAction {
         return "/web/cookie_get.jsp";
     }
 }
+<<<<<<< HEAD
 
+=======
+}
+>>>>>>> refs/remotes/haloremote/master
 ### 5,运行tomcat，然后在地址栏输入 http://localhost:8080/webapp/hello/say.do 可以访问say这个方法
 到此为基本的mvc运行，里面的Hkrequest HkResponse是HttpServletRequest HttpServletResponse的子类，可以直接使用
 
