@@ -4,7 +4,7 @@
 	<!-- spring加载 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/classes/applicationContext.xml</param-value>
+		<param-value>/WEB-INF/classes/spring.xml</param-value>
 	</context-param>
 	<!-- spring加载 -->
 	<listener>

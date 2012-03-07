@@ -4,13 +4,12 @@
 =======================================================
 ### web 使用说明:
 ### 1,导入项目依赖jar文件
-### 2,配置web.xml，示例:[web.xml]
+### 2,配置web.xml，示例:example目录中的web.xml
 
-### 3.在spring配置文件中写入:
+### 3.在spring配置文件中写入:example目录中的spring.xml
 
-### 4,在demo.haloweb.dev3g.web目录中写一个Action代码
+### 4,在demo.haloweb.dev3g.web目录中写一个Action代码:example目录中的HelloAction.java
 
-[]
 
 ### 5,运行tomcat，然后在地址栏输入 http://localhost:8080/webapp/hello/say.do 可以访问say这个方法
 到此为基本的mvc运行，里面的Hkrequest HkResponse是HttpServletRequest HttpServletResponse的子类，可以直接使用
