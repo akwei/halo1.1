@@ -2,9 +2,10 @@
 ## 框架基础环境：Servlet Spring3 jee5以上版本。 本框架的目的是为了简单的创建并使用web开发以及分布式数据库访问，让开人人员脱离struts2繁琐的配置以及冗余的annotation代码。 你只需要进行简单的配置，即可使用该框架进行web开发.
 
 =======================================================
-web 使用说明:
-1,导入项目依赖jar文件
-2,配置web.xml，示例:
+### web 使用说明:
+### 1,导入项目依赖jar文件
+### 2,配置web.xml，示例:
+{
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
@@ -58,9 +59,9 @@ web 使用说明:
                 <dispatcher>FORWARD</dispatcher>
         </filter-mapping>
 </web-app>
-
-3.在spring配置文件中写入:
-
+}
+### 3.在spring配置文件中写入:
+{
 <!-- 在spring的配置文件中添加 -->
 <context:annotation-config />
         <!-- 通过annotation 扫描的根目录 -->
@@ -95,8 +96,9 @@ web 使用说明:
                         </list>
                 </property>
         </bean>
-        
-4,在demo.haloweb.dev3g.web目录中写一个Action代码
+}
+### 4,在demo.haloweb.dev3g.web目录中写一个Action代码
+{
 package demo.haloweb.dev3g.web;
 
 import halo.util.FileUtil;
@@ -209,7 +211,7 @@ public class HelloAction {
         return "/web/cookie_get.jsp";
     }
 }
-
-5,运行tomcat，然后在地址栏输入 http://localhost:8080/webapp/hello/say.do 可以访问say这个方法
+}
+### 5,运行tomcat，然后在地址栏输入 http://localhost:8080/webapp/hello/say.do 可以访问say这个方法
 到此为基本的mvc运行，里面的Hkrequest HkResponse是HttpServletRequest HttpServletResponse的子类，可以直接使用
 
