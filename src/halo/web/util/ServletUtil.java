@@ -98,20 +98,22 @@ public class ServletUtil {
         return getHeader(request, ACCEPT);
     }
 
-    public static void sendHtml(HttpServletResponse response, Object value) {
+    public static void sendHtml(HttpServletResponse response, Object value)
+            throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         write(response, value.toString());
     }
 
-    public static void write(HttpServletResponse response, String value) {
+    public static void write(HttpServletResponse response, String value)
+            throws IOException {
         Writer writer = null;
         try {
             writer = response.getWriter();
             writer.write(value);
-            writer.flush();
         }
         catch (IOException e) {
             e.printStackTrace();
+            throw e;
         }
     }
 
@@ -293,7 +295,8 @@ public class ServletUtil {
         setSessionValue(request, MessageUtil.MESSAGE_NAME, msg);
     }
 
-    public static void sendXml(HttpServletResponse response, String value) {
+    public static void sendXml(HttpServletResponse response, String value)
+            throws IOException {
         response.setContentType("text/xml;charset=UTF-8");
         StringBuilder sb = new StringBuilder(
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
@@ -301,22 +304,23 @@ public class ServletUtil {
         sendValue(response, sb.toString());
     }
 
-    public static void sendJson(HttpServletResponse response, String value) {
+    public static void sendJson(HttpServletResponse response, String value)
+            throws IOException {
         response.setContentType("text/html;charset=UTF-8");
         StringBuilder sb = new StringBuilder();
         sb.append(value);
         sendValue(response, sb.toString());
     }
 
-    public static void sendValue(HttpServletResponse response, String value) {
+    public static void sendValue(HttpServletResponse response, String value)
+            throws IOException {
         Writer writer = null;
         try {
             writer = response.getWriter();
             writer.write(value);
-            writer.flush();
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
     }
 
