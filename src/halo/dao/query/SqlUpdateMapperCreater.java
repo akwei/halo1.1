@@ -1,6 +1,8 @@
 package halo.dao.query;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,17 +115,37 @@ public class SqlUpdateMapperCreater extends ClassLoader implements Opcodes {
                 Type.getInternalName(objectSqlInfo.getClazz()), methodName,
                 "()" + Type.getDescriptor(field.getType()));
         FieldTypeUtil.checkIdFieldType(field);
-        if (type.equals("int")) {
+        if (type.equals(FieldTypeUtil.TYPE_INT)) {
             methodVisitor.visitMethodInsn(INVOKESTATIC,
                     Type.getInternalName(ParamListUtil.class), "toObject",
                     "(I)Ljava/lang/Object;");
         }
-        else if (type.equals("long")) {
+        else if (type.equals(FieldTypeUtil.TYPE_OBJINT)) {
+            methodVisitor.visitMethodInsn(INVOKESTATIC,
+                    Type.getInternalName(ParamListUtil.class), "toObject",
+                    "(Ljava/lang/Integer;)Ljava/lang/Object;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_LONG)) {
             methodVisitor.visitMethodInsn(INVOKESTATIC,
                     Type.getInternalName(ParamListUtil.class), "toObject",
                     "(J)Ljava/lang/Object;");
         }
-        else if (type.equals("java.lang.String")) {
+        else if (type.equals(FieldTypeUtil.TYPE_OBJLONG)) {
+            methodVisitor.visitMethodInsn(INVOKESTATIC,
+                    Type.getInternalName(ParamListUtil.class), "toObject",
+                    "(Ljava/lang/Long;)Ljava/lang/Object;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGDECIMAL)) {
+            methodVisitor.visitMethodInsn(INVOKESTATIC,
+                    Type.getInternalName(ParamListUtil.class), "toObject",
+                    "(Ljava/math/BigDecimal;)Ljava/lang/Object;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGINTEGER)) {
+            methodVisitor.visitMethodInsn(INVOKESTATIC,
+                    Type.getInternalName(ParamListUtil.class), "toObject",
+                    "(Ljava/math/BigInteger;)Ljava/lang/Object;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_STRING)) {
             methodVisitor.visitMethodInsn(INVOKESTATIC,
                     Type.getInternalName(ParamListUtil.class), "toObject",
                     "(Ljava/lang/String;)Ljava/lang/Object;");
@@ -196,51 +218,86 @@ public class SqlUpdateMapperCreater extends ClassLoader implements Opcodes {
                 getGetMethodName(field),
                 "()" + Type.getDescriptor(field.getType()));
         FieldTypeUtil.checkFieldType(field);
-        if (type.equals("int")) {
+        if (type.equals(FieldTypeUtil.TYPE_INT)) {
             _methodVisitor
                     .visitMethodInsn(INVOKEVIRTUAL,
                             Type.getInternalName(ParamListUtil.class),
                             "addInt", "(I)V");
         }
-        else if (type.equals("long")) {
+        else if (type.equals(FieldTypeUtil.TYPE_LONG)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addLong",
                     "(J)V");
         }
-        else if (type.equals("short")) {
+        else if (type.equals(FieldTypeUtil.TYPE_SHORT)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addShort",
                     "(S)V");
         }
-        else if (type.equals("char")) {
-            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
-                    Type.getInternalName(ParamListUtil.class), "addChar",
-                    "(C)V");
-        }
-        else if (type.equals("byte")) {
+        else if (type.equals(FieldTypeUtil.TYPE_BYTE)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addByte",
                     "(B)V");
         }
-        else if (type.equals("float")) {
+        else if (type.equals(FieldTypeUtil.TYPE_FLOAT)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addFloat",
                     "(F)V");
         }
-        else if (type.equals("double")) {
+        else if (type.equals(FieldTypeUtil.TYPE_DOUBLE)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addDouble",
                     "(D)V");
         }
-        else if (type.equals("java.lang.String")) {
+        else if (type.equals(FieldTypeUtil.TYPE_STRING)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addString",
                     "(Ljava/lang/String;)V");
         }
-        else if (type.equals("java.util.Date")) {
+        else if (type.equals(FieldTypeUtil.TYPE_DATE)) {
             _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
                     Type.getInternalName(ParamListUtil.class), "addDate",
                     "(Ljava/util/Date;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJINT)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjInt", "("
+                            + Type.getDescriptor(Integer.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJLONG)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjLong",
+                    "(" + Type.getDescriptor(Long.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJBYTE)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjByte",
+                    "(" + Type.getDescriptor(Byte.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJDOUBLE)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjDouble",
+                    "(" + Type.getDescriptor(Double.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJFLOAT)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjFloat",
+                    "(" + Type.getDescriptor(Float.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJSHORT)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addObjShort",
+                    "(" + Type.getDescriptor(Short.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGINTEGER)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addBigInteger",
+                    "(" + Type.getDescriptor(BigInteger.class) + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGDECIMAL)) {
+            _methodVisitor.visitMethodInsn(INVOKEVIRTUAL,
+                    Type.getInternalName(ParamListUtil.class), "addBigDecimal",
+                    "(" + Type.getDescriptor(BigDecimal.class) + ")V");
         }
         _methodVisitor.visitVarInsn(ALOAD, 2);
     }

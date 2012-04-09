@@ -1,6 +1,9 @@
 package halo.dao.query;
 
+import halo.util.P;
+
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -18,22 +21,6 @@ import org.springframework.jdbc.core.RowMapper;
  * @author akwei
  */
 public class RowMapperClassCreater extends ClassLoader implements Opcodes {
-
-    private static final String TYPE_LONG = "long";
-
-    private static final String TYPE_INT = "int";
-
-    private static final String TYPE_BYTE = "byte";
-
-    private static final String TYPE_SHORT = "short";
-
-    private static final String TYPE_FLOAT = "float";
-
-    private static final String TYPE_DOUBLE = "double";
-
-    private static final String TYPE_STRING = String.class.getName();
-
-    private static final String TYPE_DATE = Date.class.getName();
 
     public RowMapperClassCreater() {
         super(Thread.currentThread().getContextClassLoader());
@@ -72,10 +59,10 @@ public class RowMapperClassCreater extends ClassLoader implements Opcodes {
                 Type.getInternalName(resultSetDataInfo.getClazz()), "<init>",
                 "()V");
         methodVisitor.visitVarInsn(ASTORE, 3);
-        methodVisitor.visitVarInsn(ALOAD, 3);
         for (Field field : resultSetDataInfo.getFieldList()) {
             createResultSetGetValue(methodVisitor, resultSetDataInfo, field);
         }
+        methodVisitor.visitVarInsn(ALOAD, 3);
         methodVisitor.visitInsn(ARETURN);
         methodVisitor.visitEnd();
         byte[] code = classWriter.toByteArray();
@@ -92,12 +79,13 @@ public class RowMapperClassCreater extends ClassLoader implements Opcodes {
 
     private <T> void createResultSetGetValue(MethodVisitor methodVisitor,
             ResultSetDataInfo<T> resultSetDataInfo, Field field) {
+        methodVisitor.visitVarInsn(ALOAD, 3);
         methodVisitor.visitVarInsn(ALOAD, 1);
         methodVisitor.visitLdcInsn(resultSetDataInfo.getFullColumn(field
                 .getName()));
         MethodInfo resultSetMethodInfo = this.createResultSetMethodInfo(field);
-        methodVisitor.visitMethodInsn(INVOKEINTERFACE,
-                Type.getInternalName(ResultSet.class),
+        methodVisitor.visitMethodInsn(INVOKESTATIC,
+                Type.getInternalName(RowMapperUtil.class),
                 resultSetMethodInfo.getMethodName(),
                 resultSetMethodInfo.getMethodDescr());
         MethodInfo setterMethodInfo = this.createSetterMethodInfo(field);
@@ -105,7 +93,10 @@ public class RowMapperClassCreater extends ClassLoader implements Opcodes {
                 Type.getInternalName(resultSetDataInfo.getClazz()),
                 setterMethodInfo.getMethodName(),
                 setterMethodInfo.getMethodDescr());
-        methodVisitor.visitVarInsn(ALOAD, 3);
+    }
+
+    public static void main(String[] args) {
+        P.println(Type.getDescriptor(BigDecimal.class));
     }
 
     private MethodInfo createSetterMethodInfo(Field field) {
@@ -113,30 +104,54 @@ public class RowMapperClassCreater extends ClassLoader implements Opcodes {
         String type = field.getType().getName();
         MethodInfo methodInfo = new MethodInfo();
         methodInfo.setMethodName(this.createSetMethodString(field.getName()));
-        if (type.equals(TYPE_INT)) {
+        if (type.equals(FieldTypeUtil.TYPE_INT)) {
             methodInfo.setMethodDescr("(I)V");
         }
-        if (type.equals(TYPE_SHORT)) {
+        else if (type.equals(FieldTypeUtil.TYPE_SHORT)) {
             methodInfo.setMethodDescr("(S)V");
         }
-        if (type.equals(TYPE_BYTE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_BYTE)) {
             methodInfo.setMethodDescr("(B)V");
         }
-        if (type.equals(TYPE_LONG)) {
+        else if (type.equals(FieldTypeUtil.TYPE_LONG)) {
             methodInfo.setMethodDescr("(J)V");
         }
-        if (type.equals(TYPE_FLOAT)) {
+        else if (type.equals(FieldTypeUtil.TYPE_FLOAT)) {
             methodInfo.setMethodDescr("(F)V");
         }
-        if (type.equals(TYPE_DOUBLE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_DOUBLE)) {
             methodInfo.setMethodDescr("(D)V");
         }
-        if (type.equals(TYPE_STRING)) {
+        else if (type.equals(FieldTypeUtil.TYPE_STRING)) {
             methodInfo.setMethodDescr("(Ljava/lang/String;)V");
         }
-        if (type.equals(TYPE_DATE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_DATE)) {
             methodInfo.setMethodDescr("(" + Type.getDescriptor(Date.class)
                     + ")V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGINTEGER)) {
+            methodInfo.setMethodDescr("(Ljava/math/BigInteger;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJINT)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Integer;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJLONG)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Long;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJSHORT)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Short;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJBYTE)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Byte;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJFLOAT)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Float;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJDOUBLE)) {
+            methodInfo.setMethodDescr("(Ljava/lang/Double;)V");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGDECIMAL)) {
+            methodInfo.setMethodDescr("(Ljava/math/BigDecimal;)V");
         }
         return methodInfo;
     }
@@ -145,38 +160,86 @@ public class RowMapperClassCreater extends ClassLoader implements Opcodes {
         FieldTypeUtil.checkFieldType(field);
         MethodInfo methodInfo = new MethodInfo();
         String type = field.getType().getName();
-        if (type.equals(TYPE_INT)) {
+        if (type.equals(FieldTypeUtil.TYPE_INT)) {
+            Type.getDescriptor(ResultSet.class);
             methodInfo.setMethodName("getInt");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)I");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)I");
         }
-        if (type.equals(TYPE_SHORT)) {
+        else if (type.equals(FieldTypeUtil.TYPE_SHORT)) {
             methodInfo.setMethodName("getShort");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)S");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)S");
         }
-        if (type.equals(TYPE_BYTE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_BYTE)) {
             methodInfo.setMethodName("getByte");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)B");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)B");
         }
-        if (type.equals(TYPE_LONG)) {
+        else if (type.equals(FieldTypeUtil.TYPE_LONG)) {
             methodInfo.setMethodName("getLong");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)J");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)J");
         }
-        if (type.equals(TYPE_FLOAT)) {
+        else if (type.equals(FieldTypeUtil.TYPE_FLOAT)) {
             methodInfo.setMethodName("getFloat");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)F");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)F");
         }
-        if (type.equals(TYPE_DOUBLE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_DOUBLE)) {
             methodInfo.setMethodName("getDouble");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)D");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)D");
         }
-        if (type.equals(TYPE_STRING)) {
+        else if (type.equals(FieldTypeUtil.TYPE_STRING)) {
             methodInfo.setMethodName("getString");
-            methodInfo.setMethodDescr("(Ljava/lang/String;)Ljava/lang/String;");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/String;");
         }
-        if (type.equals(TYPE_DATE)) {
+        else if (type.equals(FieldTypeUtil.TYPE_DATE)) {
             methodInfo.setMethodName("getTimestamp");
             methodInfo
-                    .setMethodDescr("(Ljava/lang/String;)Ljava/sql/Timestamp;");
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/sql/Timestamp;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGINTEGER)) {
+            methodInfo.setMethodName("getBigInteger");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/math/BigInteger;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJINT)) {
+            methodInfo.setMethodName("getObjInt");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Integer;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJLONG)) {
+            methodInfo.setMethodName("getObjLong");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Long;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJSHORT)) {
+            methodInfo.setMethodName("getObjShort");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Short;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJBYTE)) {
+            methodInfo.setMethodName("getObjByte");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Byte;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJFLOAT)) {
+            methodInfo.setMethodName("getObjFloat");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Float;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_OBJDOUBLE)) {
+            methodInfo.setMethodName("getObjDouble");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/lang/Double;");
+        }
+        else if (type.equals(FieldTypeUtil.TYPE_BIGDECIMAL)) {
+            methodInfo.setMethodName("getBigDecimal");
+            methodInfo
+                    .setMethodDescr("(Ljava/sql/ResultSet;Ljava/lang/String;)Ljava/math/BigDecimal;");
         }
         return methodInfo;
     }

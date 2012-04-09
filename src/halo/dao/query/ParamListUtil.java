@@ -1,5 +1,7 @@
 package halo.dao.query;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +14,23 @@ public class ParamListUtil {
         this.list.add(value);
     }
 
+    public void addObjInt(Integer value) {
+        this.list.add(value);
+    }
+
+    public void addBigInteger(BigInteger value) {
+        this.list.add(value);
+    }
+
+    public void addBigDecimal(BigDecimal value) {
+        this.list.add(value);
+    }
+
     public void addLong(long value) {
+        this.list.add(value);
+    }
+
+    public void addObjLong(Long value) {
         this.list.add(value);
     }
 
@@ -24,7 +42,15 @@ public class ParamListUtil {
         this.list.add(value);
     }
 
+    public void addObjByte(Byte value) {
+        this.list.add(value);
+    }
+
     public void addShort(short value) {
+        this.list.add(value);
+    }
+
+    public void addObjShort(Short value) {
         this.list.add(value);
     }
 
@@ -40,7 +66,15 @@ public class ParamListUtil {
         this.list.add(value);
     }
 
+    public void addObjFloat(Float value) {
+        this.list.add(value);
+    }
+
     public void addDouble(double value) {
+        this.list.add(value);
+    }
+
+    public void addObjDouble(Double value) {
         this.list.add(value);
     }
 
@@ -52,7 +86,15 @@ public class ParamListUtil {
         return value;
     }
 
+    public static Object toObject(Integer value) {
+        return value;
+    }
+
     public static Object toObject(long value) {
+        return Long.valueOf(value);
+    }
+
+    public static Object toObject(Long value) {
         return Long.valueOf(value);
     }
 
@@ -60,7 +102,15 @@ public class ParamListUtil {
         return value;
     }
 
+    public static Object toObject(Short value) {
+        return value;
+    }
+
     public static Object toObject(byte value) {
+        return value;
+    }
+
+    public static Object toObject(Byte value) {
         return value;
     }
 
@@ -72,12 +122,31 @@ public class ParamListUtil {
         return value;
     }
 
+    public static Object toObject(Float value) {
+        return value;
+    }
+
     public static Object toObject(double value) {
+        return value;
+    }
+
+    public static Object toObject(Double value) {
         return value;
     }
 
     public static Object toObject(String value) {
         return value;
+    }
+
+    public static Object toObject(BigDecimal value) {
+        return value;
+    }
+
+    public static Object toObject(BigInteger value) {
+        if (value == null) {
+            return null;
+        }
+        return String.valueOf(value);
     }
 
     public static Object toObject(Date value) {
