@@ -11,50 +11,50 @@ import java.util.Map;
  */
 public abstract class DbPartitionHelper {
 
-	private String baseDatasourceKey;
+    private String baseDatasourceKey;
 
-	public void setBaseDatasourceKey(String baseDatasourceKey) {
-		this.baseDatasourceKey = baseDatasourceKey;
-	}
+    public void setBaseDatasourceKey(String baseDatasourceKey) {
+        this.baseDatasourceKey = baseDatasourceKey;
+    }
 
-	public String getBaseDatasourceKey() {
-		return baseDatasourceKey;
-	}
+    public String getBaseDatasourceKey() {
+        return baseDatasourceKey;
+    }
 
-	protected String get01(Number id) {
-		if (id.equals(0)) {
-			throw new IllegalArgumentException("Id is 0");
-		}
-		long v = id.longValue();
-		long res = v % 2;
-		if (res == 0) {
-			return "0";
-		}
-		return "1";
-	}
+    protected String get01(Number id) {
+        if (id.equals(0)) {
+            throw new IllegalArgumentException("Id is 0");
+        }
+        long v = id.longValue();
+        long res = v % 2;
+        if (res == 0) {
+            return "0";
+        }
+        return "1";
+    }
 
-	protected String getLastChar(Number id) {
-		if (id.equals(0)) {
-			throw new IllegalArgumentException("Id is 0");
-		}
-		String ss = String.valueOf(id);
-		int len = ss.length();
-		if (len == 1) {
-			return ss;
-		}
-		ss = ss.substring(ss.length() - 1, ss.length());
-		return ss;
-	}
+    protected String getLastChar(Number id) {
+        if (id.equals(0)) {
+            throw new IllegalArgumentException("Id is 0");
+        }
+        String ss = String.valueOf(id);
+        int len = ss.length();
+        if (len == 1) {
+            return ss;
+        }
+        ss = ss.substring(ss.length() - 1, ss.length());
+        return ss;
+    }
 
-	/**
-	 * 根据内容进行分析，创建表的分区信息
-	 * 
-	 * @param tableLogicName
-	 *            逻辑表名称，也将会成为表的别名
-	 * @param ctxMap
-	 *            上下文信息存储,用来存储分区关键值
-	 * @return
-	 */
-	public abstract PartitionTableInfo parse(String tableLogicName,
-			Map<String, Object> ctxMap);
+    /**
+     * 根据内容进行分析，创建表的分区信息
+     * 
+     * @param tableLogicName
+     *            逻辑表名称，也将会成为表的别名
+     * @param ctxMap
+     *            上下文信息存储,用来存储分区关键值
+     * @return
+     */
+    public abstract PartitionTableInfo parse(String tableLogicName,
+            Map<String, Object> ctxMap);
 }

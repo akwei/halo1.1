@@ -11,26 +11,26 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class ExceptionConfig implements InitializingBean {
 
-	private static Map<String, String> exceptionMap = null;
+    private static Map<String, String> exceptionMap = null;
 
-	private static boolean freeze;
+    private static boolean freeze;
 
-	public void setExceptionMap(Map<String, String> exceptionMap) {
-		if (freeze) {
-			throw new RuntimeException("exceptionMap freeze");
-		}
-		ExceptionConfig.exceptionMap = exceptionMap;
-	}
+    public void setExceptionMap(Map<String, String> exceptionMap) {
+        if (freeze) {
+            throw new RuntimeException("exceptionMap freeze");
+        }
+        ExceptionConfig.exceptionMap = exceptionMap;
+    }
 
-	public static String getExceptionForward(String exceptionClassName) {
-		if (exceptionMap == null) {
-			return null;
-		}
-		return exceptionMap.get(exceptionClassName);
-	}
+    public static String getExceptionForward(String exceptionClassName) {
+        if (exceptionMap == null) {
+            return null;
+        }
+        return exceptionMap.get(exceptionClassName);
+    }
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		freeze = true;
-	}
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        freeze = true;
+    }
 }

@@ -7,32 +7,34 @@ package halo.web.action;
  */
 public class UploadFileCheckCnf {
 
-	private int maxSize;
+    private int maxSize;
 
-	private String uri;
+    private String uri;
 
-	/**
-	 * @param maxSize 接受文件的最大限制(单位M)
-	 * @param uri 去除contextPath之后的uri
-	 */
-	public UploadFileCheckCnf(int maxSize, String uri) {
-		this.maxSize = maxSize;
-		this.uri = uri;
-	}
+    /**
+     * @param maxSize
+     *            接受文件的最大限制(单位M)
+     * @param uri
+     *            去除contextPath之后的uri
+     */
+    public UploadFileCheckCnf(int maxSize, String uri) {
+        this.maxSize = maxSize;
+        this.uri = uri;
+    }
 
-	public int getMaxSize() {
-		return maxSize;
-	}
+    public int getMaxSize() {
+        return maxSize;
+    }
 
-	public void setMaxSize(int maxSize) {
-		this.maxSize = maxSize;
-	}
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
 
-	public String getUri() {
-		return uri;
-	}
+    public String getUri() {
+        return uri;
+    }
 
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
 }

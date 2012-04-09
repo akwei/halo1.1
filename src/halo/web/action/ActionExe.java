@@ -17,47 +17,47 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ActionExe {
 
-	/**
-	 * 处理对应mappingUri的action
-	 * 
-	 * @param mappingUri
-	 *            去除contextPath，后缀之后剩下的部分<br>
-	 *            例如：[requestContextPath]/user/list.do,mappingUri=/user/list
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws Exception
-	 */
-	public static String invoke(String mappingUri, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		HkRequest hkRequest = HaloWebUtil.getHkRequest(request);
-		HkResponse hkResponse = HaloWebUtil.getHkResponse(response);
-		try {
-			AsmActionMapping actionMapping = ActionMappingCreator
-					.getAsmActionMapping(mappingUri);
-			return actionMapping.getAsmAction().execute(hkRequest, hkResponse);
-		}
-		catch (Exception e) {
-			throw e;
-		}
-		finally {
-			afterProcess(hkRequest);
-		}
-	}
+    /**
+     * 处理对应mappingUri的action
+     * 
+     * @param mappingUri
+     *            去除contextPath，后缀之后剩下的部分<br>
+     *            例如：[requestContextPath]/user/list.do,mappingUri=/user/list
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
+    public static String invoke(String mappingUri, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HkRequest hkRequest = HaloWebUtil.getHkRequest(request);
+        HkResponse hkResponse = HaloWebUtil.getHkResponse(response);
+        try {
+            AsmActionMapping actionMapping = ActionMappingCreator
+                    .getAsmActionMapping(mappingUri);
+            return actionMapping.getAsmAction().execute(hkRequest, hkResponse);
+        }
+        catch (Exception e) {
+            throw e;
+        }
+        finally {
+            afterProcess(hkRequest);
+        }
+    }
 
-	public static void afterProcess(HkRequest request) {
-		deleteFiles(request);
-	}
+    public static void afterProcess(HkRequest request) {
+        deleteFiles(request);
+    }
 
-	private static boolean deleteFiles(HkRequest request) {
-		File[] files = request.getFiles();
-		if (files != null) {
-			for (File f : files) {
-				if (!FileUtil.deleteFile(f)) {
-					continue;
-				}
-			}
-		}
-		return true;
-	}
+    private static boolean deleteFiles(HkRequest request) {
+        File[] files = request.getFiles();
+        if (files != null) {
+            for (File f : files) {
+                if (!FileUtil.deleteFile(f)) {
+                    continue;
+                }
+            }
+        }
+        return true;
+    }
 }

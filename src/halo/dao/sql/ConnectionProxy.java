@@ -9,11 +9,11 @@ import java.sql.Connection;
  */
 public interface ConnectionProxy extends Connection {
 
-	/**
-	 * 获得当前使用的Connection
-	 * 
-	 * @return
-	 * @see Connection
-	 */
-	Connection getCurrentConnection();
+    /**
+     * 获得当前使用的Connection
+     * 
+     * @return
+     * @see Connection
+     */
+    Connection getCurrentConnection();
 }

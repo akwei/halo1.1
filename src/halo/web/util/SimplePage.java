@@ -1,58 +1,59 @@
 package halo.web.util;
 
 public class SimplePage {
-	private int size;
 
-	private int page;
+    private int size;
 
-	private int listSize;
+    private int page;
 
-	private int begin;
+    private int listSize;
 
-	private boolean hasNext;
+    private int begin;
 
-	public SimplePage(int size, int page) {
-		this.size = size;
-		this.setPage(page);
-	}
+    private boolean hasNext;
 
-	public void setPage(int page) {
-		this.page = page;
-		this.begin = (page - 1) * size;
-		if (begin < 0) {
-			begin = 0;
-		}
-	}
+    public SimplePage(int size, int page) {
+        this.size = size;
+        this.setPage(page);
+    }
 
-	public void setListSize(int listSize) {
-		this.listSize = listSize;
-	}
+    public void setPage(int page) {
+        this.page = page;
+        this.begin = (page - 1) * size;
+        if (begin < 0) {
+            begin = 0;
+        }
+    }
 
-	public int getBegin() {
-		return begin;
-	}
+    public void setListSize(int listSize) {
+        this.listSize = listSize;
+    }
 
-	public int getSize() {
-		return size;
-	}
+    public int getBegin() {
+        return begin;
+    }
 
-	public int getPage() {
-		return page;
-	}
+    public int getSize() {
+        return size;
+    }
 
-	public int getListSize() {
-		return listSize;
-	}
+    public int getPage() {
+        return page;
+    }
 
-	public void setBegin(int begin) {
-		this.begin = begin;
-	}
+    public int getListSize() {
+        return listSize;
+    }
 
-	public boolean isHasNext() {
-		return hasNext;
-	}
+    public void setBegin(int begin) {
+        this.begin = begin;
+    }
 
-	public void setHasNext(boolean hasNext) {
-		this.hasNext = hasNext;
-	}
+    public boolean isHasNext() {
+        return hasNext;
+    }
+
+    public void setHasNext(boolean hasNext) {
+        this.hasNext = hasNext;
+    }
 }

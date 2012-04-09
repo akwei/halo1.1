@@ -4,39 +4,39 @@ import java.io.File;
 
 public class UploadFile {
 
-	private String name;
+    private String name;
 
-	private File file;
+    private File file;
 
-	private String originName;
+    private String originName;
 
-	public UploadFile(String name, File file, String originName) {
-		this.name = name;
-		this.originName = originName;
-		this.file = file;
-	}
+    public UploadFile(String name, File file, String originName) {
+        this.name = name;
+        this.originName = originName;
+        this.file = file;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public File getFile() {
-		return file;
-	}
+    public File getFile() {
+        return file;
+    }
 
-	public void setFile(File file) {
-		this.file = file;
-	}
+    public void setFile(File file) {
+        this.file = file;
+    }
 
-	public String getOriginName() {
-		return originName;
-	}
+    public String getOriginName() {
+        return originName;
+    }
 
-	public void setOriginName(String originName) {
-		this.originName = originName;
-	}
+    public void setOriginName(String originName) {
+        this.originName = originName;
+    }
 }

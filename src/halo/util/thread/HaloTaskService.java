@@ -15,23 +15,23 @@ import java.util.concurrent.TimeUnit;
  */
 public class HaloTaskService {
 
-	private final List<Callable<Boolean>> taskList = new ArrayList<Callable<Boolean>>();
+    private final List<Callable<Boolean>> taskList = new ArrayList<Callable<Boolean>>();
 
-	public void addTask(Callable<Boolean> task) {
-		taskList.add(task);
-	}
+    public void addTask(Callable<Boolean> task) {
+        taskList.add(task);
+    }
 
-	public void addTasks(Collection<Callable<Boolean>> c) {
-		taskList.addAll(c);
-	}
+    public void addTasks(Collection<Callable<Boolean>> c) {
+        taskList.addAll(c);
+    }
 
-	public List<Future<Boolean>> invokeAll(ExecutorService executorService)
-			throws Exception {
-		return executorService.invokeAll(taskList);
-	}
+    public List<Future<Boolean>> invokeAll(ExecutorService executorService)
+            throws Exception {
+        return executorService.invokeAll(taskList);
+    }
 
-	public List<Future<Boolean>> invokeAll(ExecutorService executorService,
-			long timeout, TimeUnit unit) throws InterruptedException {
-		return executorService.invokeAll(taskList, timeout, unit);
-	}
+    public List<Future<Boolean>> invokeAll(ExecutorService executorService,
+            long timeout, TimeUnit unit) throws InterruptedException {
+        return executorService.invokeAll(taskList, timeout, unit);
+    }
 }

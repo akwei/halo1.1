@@ -7,10 +7,10 @@ package halo.dao.query;
  */
 public class InsertParam extends Param {
 
-	public InsertParam() {
-	}
+    public InsertParam() {
+    }
 
-	public InsertParam(String key, Object value) {
-		super(key, value);
-	}
+    public InsertParam(String key, Object value) {
+        super(key, value);
+    }
 }

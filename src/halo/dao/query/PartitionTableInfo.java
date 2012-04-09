@@ -7,65 +7,65 @@ package halo.dao.query;
  */
 public class PartitionTableInfo {
 
-	/**
-	 * 数据源key
-	 */
-	private String dsKey;
+    /**
+     * 数据源key
+     */
+    private String dsKey;
 
-	/**
-	 * 表真是名称
-	 */
-	private String tableName;
+    /**
+     * 表真是名称
+     */
+    private String tableName;
 
-	/**
-	 * 表的别名
-	 */
-	private String aliasName;
+    /**
+     * 表的别名
+     */
+    private String aliasName;
 
-	public PartitionTableInfo() {
-	}
+    public PartitionTableInfo() {
+    }
 
-	public PartitionTableInfo(String dsKey, String tableName) {
-		this.dsKey = dsKey;
-		this.tableName = tableName;
-	}
+    public PartitionTableInfo(String dsKey, String tableName) {
+        this.dsKey = dsKey;
+        this.tableName = tableName;
+    }
 
-	public String getDsKey() {
-		return dsKey;
-	}
+    public String getDsKey() {
+        return dsKey;
+    }
 
-	/**
-	 * 设置数据库真实key
-	 * 
-	 * @param dsKey
-	 */
-	public void setDsKey(String dsKey) {
-		this.dsKey = dsKey;
-	}
+    /**
+     * 设置数据库真实key
+     * 
+     * @param dsKey
+     */
+    public void setDsKey(String dsKey) {
+        this.dsKey = dsKey;
+    }
 
-	public String getTableName() {
-		return tableName;
-	}
+    public String getTableName() {
+        return tableName;
+    }
 
-	/**
-	 * 设置表真实名称
-	 * 
-	 * @param tableName
-	 */
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
-	}
+    /**
+     * 设置表真实名称
+     * 
+     * @param tableName
+     */
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
 
-	/**
-	 * 设置表别名
-	 * 
-	 * @param aliasName
-	 */
-	public void setAliasName(String aliasName) {
-		this.aliasName = aliasName;
-	}
+    /**
+     * 设置表别名
+     * 
+     * @param aliasName
+     */
+    public void setAliasName(String aliasName) {
+        this.aliasName = aliasName;
+    }
 
-	public String getAliasName() {
-		return aliasName;
-	}
+    public String getAliasName() {
+        return aliasName;
+    }
 }

@@ -8,7 +8,8 @@ public class ActionURIMappingCreater {
     /**
      * 解析mappingUri获取 actionName methodName
      * 
-     * @param mappingUri 去除 contextPath后的uri
+     * @param mappingUri
+     *            去除 contextPath后的uri
      * @return
      */
     public static ActionURIMapping parse(String mappingUri) {

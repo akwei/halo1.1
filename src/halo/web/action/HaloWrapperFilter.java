@@ -19,29 +19,29 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HaloWrapperFilter extends HaloFilter {
 
-	@Override
-	public void doFilter(HttpServletRequest request,
-			HttpServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HkRequest hkRequest = null;
-		try {
-			hkRequest = HaloWebUtil.getHkRequest(request);
-			chain.doFilter(hkRequest, HaloWebUtil.getHkResponse(response));
-		}
-		finally {
-			this.clean(hkRequest);
-		}
-	}
+    @Override
+    public void doFilter(HttpServletRequest request,
+            HttpServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HkRequest hkRequest = null;
+        try {
+            hkRequest = HaloWebUtil.getHkRequest(request);
+            chain.doFilter(hkRequest, HaloWebUtil.getHkResponse(response));
+        }
+        finally {
+            this.clean(hkRequest);
+        }
+    }
 
-	private void clean(HkRequest hkRequest) {
-		if (hkRequest == null) {
-			return;
-		}
-		File[] files = hkRequest.getFiles();
-		if (files != null) {
-			for (File f : files) {
-				FileUtil.deleteFile(f);
-			}
-		}
-	}
+    private void clean(HkRequest hkRequest) {
+        if (hkRequest == null) {
+            return;
+        }
+        File[] files = hkRequest.getFiles();
+        if (files != null) {
+            for (File f : files) {
+                FileUtil.deleteFile(f);
+            }
+        }
+    }
 }

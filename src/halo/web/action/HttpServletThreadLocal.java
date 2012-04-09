@@ -7,7 +7,6 @@ package halo.web.action;
  */
 public class HttpServletThreadLocal {
 
-	private HttpServletThreadLocal() {
-	}
-	
+    private HttpServletThreadLocal() {
+    }
 }

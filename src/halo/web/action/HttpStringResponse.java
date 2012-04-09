@@ -9,19 +9,19 @@ import javax.servlet.http.HttpServletResponseWrapper;
 
 public class HttpStringResponse extends HttpServletResponseWrapper {
 
-	private StringWriter stringWriter;
+    private StringWriter stringWriter;
 
-	public HttpStringResponse(HttpServletResponse response) {
-		super(response);
-		stringWriter = new StringWriter(response.getBufferSize());
-	}
+    public HttpStringResponse(HttpServletResponse response) {
+        super(response);
+        stringWriter = new StringWriter(response.getBufferSize());
+    }
 
-	@Override
-	public PrintWriter getWriter() throws IOException {
-		return new PrintWriter(stringWriter);
-	}
+    @Override
+    public PrintWriter getWriter() throws IOException {
+        return new PrintWriter(stringWriter);
+    }
 
-	public String getString() {
-		return stringWriter.getBuffer().toString();
-	}
+    public String getString() {
+        return stringWriter.getBuffer().toString();
+    }
 }

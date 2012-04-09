@@ -13,19 +13,19 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Table {
 
-	String name();
+    String name();
 
-	/**
-	 * 指使用spring声明的对象id
-	 * 
-	 * @return
-	 */
-	String partitionid() default "";
+    /**
+     * 指使用spring声明的对象id
+     * 
+     * @return
+     */
+    String partitionid() default "";
 
-	/**
-	 * 进行分区所使用的类
-	 * 
-	 * @return
-	 */
-	Class<?> partitionClass() default DbPartitionHelperDef.class;
+    /**
+     * 进行分区所使用的类
+     * 
+     * @return
+     */
+    Class<?> partitionClass() default DbPartitionHelperDef.class;
 }

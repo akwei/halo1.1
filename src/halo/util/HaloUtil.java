@@ -9,41 +9,41 @@ import org.springframework.context.ApplicationContextAware;
 
 public class HaloUtil implements ApplicationContextAware {
 
-	private static ApplicationContext webApplicationContext = null;
+    private static ApplicationContext webApplicationContext = null;
 
-	public static final Map<String, Object> objMap = new HashMap<String, Object>();
+    public static final Map<String, Object> objMap = new HashMap<String, Object>();
 
-	public static ApplicationContext getWebApplicationContext() {
-		return webApplicationContext;
-	}
+    public static ApplicationContext getWebApplicationContext() {
+        return webApplicationContext;
+    }
 
-	public static Object getBean(String name) {
-		Object obj = objMap.get(name);
-		if (obj == null) {
-			obj = getBeanFromSpring(name);
-			if (obj != null) {
-				objMap.put(name, obj);
-			}
-		}
-		return obj;
-	}
+    public static Object getBean(String name) {
+        Object obj = objMap.get(name);
+        if (obj == null) {
+            obj = getBeanFromSpring(name);
+            if (obj != null) {
+                objMap.put(name, obj);
+            }
+        }
+        return obj;
+    }
 
-	private static synchronized Object getBeanFromSpring(String name) {
-		Object obj = objMap.get(name);
-		if (obj != null) {
-			return obj;
-		}
-		try {
-			return webApplicationContext.getBean(name);
-		}
-		catch (BeansException e) {
-			return null;
-		}
-	}
+    private static synchronized Object getBeanFromSpring(String name) {
+        Object obj = objMap.get(name);
+        if (obj != null) {
+            return obj;
+        }
+        try {
+            return webApplicationContext.getBean(name);
+        }
+        catch (BeansException e) {
+            return null;
+        }
+    }
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext)
-			throws BeansException {
-		webApplicationContext = applicationContext;
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext)
+            throws BeansException {
+        webApplicationContext = applicationContext;
+    }
 }

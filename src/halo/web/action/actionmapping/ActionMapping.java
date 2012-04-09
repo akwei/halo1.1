@@ -9,55 +9,55 @@ import java.lang.reflect.Method;
  */
 public class ActionMapping {
 
-	/**
-	 * Action中要运行的方法名称
-	 */
-	private String methodName;
+    /**
+     * Action中要运行的方法名称
+     */
+    private String methodName;
 
-	/**
-	 * Action对象
-	 */
-	private Object action;
+    /**
+     * Action对象
+     */
+    private Object action;
 
-	/**
-	 * Action匹配名称
-	 */
-	private String actionName;
+    /**
+     * Action匹配名称
+     */
+    private String actionName;
 
-	/**
-	 * Action中要运行的方法对象
-	 */
-	private Method actionMethod;
+    /**
+     * Action中要运行的方法对象
+     */
+    private Method actionMethod;
 
-	public void setMethodName(String methodName) {
-		this.methodName = methodName;
-	}
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
 
-	public void setAction(Object action) {
-		this.action = action;
-	}
+    public void setAction(Object action) {
+        this.action = action;
+    }
 
-	public void setActionName(String actionName) {
-		this.actionName = actionName;
-	}
+    public void setActionName(String actionName) {
+        this.actionName = actionName;
+    }
 
-	public void setActionMethod(Method actionMethod) {
-		this.actionMethod = actionMethod;
-	}
+    public void setActionMethod(Method actionMethod) {
+        this.actionMethod = actionMethod;
+    }
 
-	public Method getActionMethod() {
-		return actionMethod;
-	}
+    public Method getActionMethod() {
+        return actionMethod;
+    }
 
-	public String getActionName() {
-		return actionName;
-	}
+    public String getActionName() {
+        return actionName;
+    }
 
-	public String getMethodName() {
-		return methodName;
-	}
+    public String getMethodName() {
+        return methodName;
+    }
 
-	public Object getAction() {
-		return action;
-	}
+    public Object getAction() {
+        return action;
+    }
 }

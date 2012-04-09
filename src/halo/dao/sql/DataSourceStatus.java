@@ -7,17 +7,17 @@ package halo.dao.sql;
  */
 public class DataSourceStatus {
 
-	private static final ThreadLocal<String> currentDsKey = new ThreadLocal<String>();
+    private static final ThreadLocal<String> currentDsKey = new ThreadLocal<String>();
 
-	public static void setCurrentDsKey(String dsKey) {
-		currentDsKey.set(dsKey);
-	}
+    public static void setCurrentDsKey(String dsKey) {
+        currentDsKey.set(dsKey);
+    }
 
-	public static void removeCurrentDsKey() {
-		currentDsKey.remove();
-	}
+    public static void removeCurrentDsKey() {
+        currentDsKey.remove();
+    }
 
-	public static String getCurrentDsKey() {
-		return currentDsKey.get();
-	}
+    public static String getCurrentDsKey() {
+        return currentDsKey.get();
+    }
 }

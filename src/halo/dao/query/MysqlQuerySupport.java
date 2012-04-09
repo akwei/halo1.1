@@ -12,29 +12,29 @@ import org.springframework.jdbc.core.RowMapper;
  * @author akwei
  */
 public class MysqlQuerySupport extends BaseQuerySupport implements
-		QuerySupport, DaoIdentifier {
+        QuerySupport, DaoIdentifier {
 
-	@Override
-	public String getIdentifier() {
-		return DaoIdentifier.IDENTIFIER_MYSQL;
-	}
+    @Override
+    public String getIdentifier() {
+        return DaoIdentifier.IDENTIFIER_MYSQL;
+    }
 
-	@Override
-	public <T> List<T> getListBySQL(String sql, Object[] values, int begin,
-			int size, RowMapper<T> rm) {
-		if (begin >= 0 && size > 0) {
-			return this.getListBySQL(sql + " limit " + begin + "," + size,
-					values, rm);
-		}
-		return this.getListBySQL(sql, values, rm);
-	}
+    @Override
+    public <T> List<T> getListBySQL(String sql, Object[] values, int begin,
+            int size, RowMapper<T> rm) {
+        if (begin >= 0 && size > 0) {
+            return this.getListBySQL(sql + " limit " + begin + "," + size,
+                    values, rm);
+        }
+        return this.getListBySQL(sql, values, rm);
+    }
 
-	@Override
-	public <T> T getObjectBySQL(String sql, Object[] values, RowMapper<T> rm) {
-		List<T> list = this.getListBySQL(sql, values, 0, 1, rm);
-		if (list.isEmpty()) {
-			return null;
-		}
-		return list.get(0);
-	}
+    @Override
+    public <T> T getObjectBySQL(String sql, Object[] values, RowMapper<T> rm) {
+        List<T> list = this.getListBySQL(sql, values, 0, 1, rm);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
 }

@@ -25,7 +25,8 @@ public class DefActionFinder {
      * 
      * @param actionName
      * @return
-     * @throws NoActionException 没有对应的action对象时抛出此异常
+     * @throws NoActionException
+     *             没有对应的action对象时抛出此异常
      */
     public static Object findAction(String actionName) throws NoActionException {
         Object obj = actionMap.get(actionName);

@@ -4,20 +4,20 @@ import java.io.File;
 
 public class FileParameter {
 
-	private String name;
+    private String name;
 
-	private File file;
+    private File file;
 
-	public FileParameter(String name, File file) {
-		this.name = name;
-		this.file = file;
-	}
+    public FileParameter(String name, File file) {
+        this.name = name;
+        this.file = file;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public File getFile() {
-		return file;
-	}
+    public File getFile() {
+        return file;
+    }
 }

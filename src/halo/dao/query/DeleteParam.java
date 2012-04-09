@@ -7,37 +7,37 @@ package halo.dao.query;
  */
 public class DeleteParam extends Param {
 
-	public DeleteParam() {
-	}
+    public DeleteParam() {
+    }
 
-	public DeleteParam(String key, Object value) {
-		super(key, value);
-	}
+    public DeleteParam(String key, Object value) {
+        super(key, value);
+    }
 
-	private Class<?> clazz;
+    private Class<?> clazz;
 
-	private String where;
+    private String where;
 
-	private Object[] params;
+    private Object[] params;
 
-	public void setClazz(Class<?> clazz) {
-		this.clazz = clazz;
-	}
+    public void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
 
-	public Class<?> getClazz() {
-		return clazz;
-	}
+    public Class<?> getClazz() {
+        return clazz;
+    }
 
-	public String getWhere() {
-		return where;
-	}
+    public String getWhere() {
+        return where;
+    }
 
-	public Object[] getParams() {
-		return params;
-	}
+    public Object[] getParams() {
+        return params;
+    }
 
-	public void set(String where, Object[] params) {
-		this.where = where;
-		this.params = params;
-	}
+    public void set(String where, Object[] params) {
+        this.where = where;
+        this.params = params;
+    }
 }

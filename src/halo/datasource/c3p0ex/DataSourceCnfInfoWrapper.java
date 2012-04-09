@@ -7,20 +7,20 @@ package halo.datasource.c3p0ex;
  */
 public interface DataSourceCnfInfoWrapper {
 
-	/**
-	 * 获得加密后的密码串
-	 * 
-	 * @param password
-	 *            原始密码
-	 * @return
-	 */
-	String getEncodedPassword(String password);
+    /**
+     * 获得加密后的密码串
+     * 
+     * @param password
+     *            原始密码
+     * @return
+     */
+    String getEncodedPassword(String password);
 
-	/**
-	 * 获得解密后的原始密码
-	 * 
-	 * @param encodePassword
-	 * @return
-	 */
-	String getDecodedPassword(String encodePassword);
+    /**
+     * 获得解密后的原始密码
+     * 
+     * @param encodePassword
+     * @return
+     */
+    String getDecodedPassword(String encodePassword);
 }

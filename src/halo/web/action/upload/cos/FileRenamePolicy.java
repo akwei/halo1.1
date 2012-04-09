@@ -11,10 +11,11 @@ import java.io.File;
  *          basic idea
  */
 public interface FileRenamePolicy {
-	/**
-	 * Returns a File object holding a new name for the specified file.
-	 * 
-	 * @see FilePart#writeTo(File fileOrDirectory)
-	 */
-	public File rename(File f);
+
+    /**
+     * Returns a File object holding a new name for the specified file.
+     * 
+     * @see FilePart#writeTo(File fileOrDirectory)
+     */
+    public File rename(File f);
 }

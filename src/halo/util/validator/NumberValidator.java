@@ -17,41 +17,41 @@ import java.math.BigDecimal;
  */
 public class NumberValidator implements Validator {
 
-	@Override
-	public boolean exec(JsonObj jsonObj, Object obj) {
-		BigDecimal min = null;
-		BigDecimal max = null;
-		String s_min = jsonObj.getString("min");
-		String s_max = jsonObj.getString("max");
-		if (DataUtil.isNotEmpty(s_min)) {
-			min = new BigDecimal(s_min);
-		}
-		if (DataUtil.isNotEmpty(s_max)) {
-			max = new BigDecimal(s_max);
-		}
-		// 验证数据
-		if (obj == null) {
-			return false;
-		}
-		BigDecimal v;
-		try {
-			v = new BigDecimal(obj.toString());
-		}
-		catch (Exception e) {
-			throw new IllegalExpressionException(e);
-		}
-		if (min != null) {
-			int res = v.compareTo(min);
-			if (res == -1) {
-				return false;
-			}
-		}
-		if (max != null) {
-			int res = v.compareTo(max);
-			if (res == 1) {
-				return false;
-			}
-		}
-		return true;
-	}
+    @Override
+    public boolean exec(JsonObj jsonObj, Object obj) {
+        BigDecimal min = null;
+        BigDecimal max = null;
+        String s_min = jsonObj.getString("min");
+        String s_max = jsonObj.getString("max");
+        if (DataUtil.isNotEmpty(s_min)) {
+            min = new BigDecimal(s_min);
+        }
+        if (DataUtil.isNotEmpty(s_max)) {
+            max = new BigDecimal(s_max);
+        }
+        // 验证数据
+        if (obj == null) {
+            return false;
+        }
+        BigDecimal v;
+        try {
+            v = new BigDecimal(obj.toString());
+        }
+        catch (Exception e) {
+            throw new IllegalExpressionException(e);
+        }
+        if (min != null) {
+            int res = v.compareTo(min);
+            if (res == -1) {
+                return false;
+            }
+        }
+        if (max != null) {
+            int res = v.compareTo(max);
+            if (res == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
