@@ -95,9 +95,9 @@ public interface HkRequest extends HttpServletRequest {
 
     void setSessionMessage(String msg);
 
-    void setSessionValue(String name, Object value);
+    void setSessionAttr(String name, Object value);
 
-    void removeSessionValue(String name);
+    void removeSessionAttr(String name);
 
     void invalidateSession();
 

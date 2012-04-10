@@ -259,7 +259,7 @@ public class ServletUtil {
         return getNumber(request, key, num).doubleValue();
     }
 
-    public static void setSessionValue(HttpServletRequest request, String name,
+    public static void setSessionAttr(HttpServletRequest request, String name,
             Object value) {
         request.getSession().setAttribute(name, value);
     }
@@ -272,8 +272,7 @@ public class ServletUtil {
         return request.getAttribute(name);
     }
 
-    public static void removeSessionValue(HttpServletRequest request,
-            String name) {
+    public static void removeSessionAttr(HttpServletRequest request, String name) {
         request.getSession().removeAttribute(name);
     }
 
@@ -292,7 +291,7 @@ public class ServletUtil {
     }
 
     public static void setSessionMessage(HttpServletRequest request, String msg) {
-        setSessionValue(request, MessageUtil.MESSAGE_NAME, msg);
+        setSessionAttr(request, MessageUtil.MESSAGE_NAME, msg);
     }
 
     public static void sendXml(HttpServletResponse response, String value)

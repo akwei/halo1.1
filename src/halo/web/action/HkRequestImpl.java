@@ -381,8 +381,8 @@ public class HkRequestImpl extends HttpServletRequestWrapper implements
     }
 
     @Override
-    public void setSessionValue(String name, Object value) {
-        ServletUtil.setSessionValue(getHttpServletRequest(), name, value);
+    public void setSessionAttr(String name, Object value) {
+        ServletUtil.setSessionAttr(getHttpServletRequest(), name, value);
     }
 
     @Override
@@ -414,7 +414,7 @@ public class HkRequestImpl extends HttpServletRequestWrapper implements
     }
 
     @Override
-    public void removeSessionValue(String name) {
+    public void removeSessionAttr(String name) {
         this.getHttpServletRequest().getSession().removeAttribute(name);
     }
 
