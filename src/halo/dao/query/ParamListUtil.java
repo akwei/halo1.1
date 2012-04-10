@@ -143,10 +143,7 @@ public class ParamListUtil {
     }
 
     public static Object toObject(BigInteger value) {
-        if (value == null) {
-            return null;
-        }
-        return String.valueOf(value);
+        return value;
     }
 
     public static Object toObject(Date value) {
