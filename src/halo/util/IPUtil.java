@@ -3,10 +3,6 @@ package halo.util;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
-import org.apache.commons.collections.FastTreeMap;
 
 import sun.net.util.IPAddressUtil;
 
@@ -125,12 +121,5 @@ public class IPUtil {
             idx = str.indexOf(s, idx + 1);
         }
         return sum;
-    }
-
-    public static void main(String[] args) {
-        P.println(IPUtil.getIpNumber("e13::").toString());
-        Map<String, String> map;
-        FastTreeMap ftm;
-        TreeMap<String, String> tm;
     }
 }
